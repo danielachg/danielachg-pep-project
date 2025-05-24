@@ -3,6 +3,8 @@ package Service;
 import DAO.MessageDAO;
 import Model.Message;
 
+import java.util.List;
+
 public class MessageService {
     private MessageDAO messageDAO;
 
@@ -18,6 +20,10 @@ public class MessageService {
 
         return null;
 
+    }
+
+    public List<Message> getAllMessages(){
+        return messageDAO.getAllMessages();
     }
     
 }
