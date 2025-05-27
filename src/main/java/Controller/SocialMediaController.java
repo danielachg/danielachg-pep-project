@@ -38,6 +38,7 @@ public class SocialMediaController {
         app.post("/messages", this::postMessageHandler);
         app.get("/messages", this::getAllMessagesHandler);
         app.get("/messages/{message_id}", this::getMessageByIdHandler);
+        app.delete("/messages/{message_id}", this::deleteMessageByIdHandler);
 
         return app;
     }
@@ -94,10 +95,23 @@ public class SocialMediaController {
 
         if (targetMessage == null){
             context.result("");
-        } else{
+        } else {
             context.json(targetMessage);
         }
+    }
+
+    private void deleteMessageByIdHandler(Context context){
+        int message_id = Integer.parseInt(context.pathParam("message_id")); 
+        Message targetMessage = messageService.deleteMessageById(message_id);
+
+        if (targetMessage == null){
+            context.result("");
+        } else {
+            context.json(targetMessage);
         }
+
+    }
+
 
 
 }
