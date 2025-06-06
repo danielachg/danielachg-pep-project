@@ -26,7 +26,7 @@ public class MessageDAO {
 
             ResultSet primaryKeyResultSet = preparedStatement.getGeneratedKeys();
 
-            if (primaryKeyResultSet.next()){
+            while(primaryKeyResultSet.next()){
                 int generated_message_id = primaryKeyResultSet.getInt(1);
                 return new Message(generated_message_id, message.getPosted_by(), message.getMessage_text(), message.getTime_posted_epoch());
             }
@@ -37,27 +37,6 @@ public class MessageDAO {
         return null;
     }
 
-    public Message getUserByPostedId(int posted_by){
-
-        Connection connection = ConnectionUtil.getConnection();
-
-        try{
-
-            String sql = "SELECT * FROM Message WHERE posted_by=?;";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            preparedStatement.setInt(1, posted_by);
-
-            ResultSet rs = preparedStatement.executeQuery();
-            while(rs.next()){
-                return new Message(rs.getInt("message_id"), rs.getInt("posted_by"), rs.getString("message_text"), rs.getLong("time_posted_epoch"));
-            }
-
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
 
     public List<Message> getAllMessages(){
 

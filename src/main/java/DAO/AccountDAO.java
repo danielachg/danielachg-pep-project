@@ -45,7 +45,7 @@ public class AccountDAO {
 
             ResultSet primaryKeyResult = preparedStatement.getGeneratedKeys();
 
-            if (primaryKeyResult.next()){
+            while(primaryKeyResult.next()){
 
                 int generated_account_id = primaryKeyResult.getInt(1);
                 return new Account(generated_account_id, account.getUsername(), account.getPassword());
