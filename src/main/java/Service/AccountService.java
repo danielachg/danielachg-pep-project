@@ -21,7 +21,7 @@ public class AccountService {
         return null;
     }
 
-    public Account geAccount(Account account){
+    public Account getAccount(Account account){
         
         Account targetAccount = accountDAO.getAccount(account);
 
